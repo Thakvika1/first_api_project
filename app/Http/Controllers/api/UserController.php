@@ -12,7 +12,9 @@ class UserController extends Controller
     public function index(Request $r)
     {
 
+
         $users = User::paginate($r->per_page ?? 10);
+        // $users = User::with('categories')->paginate($r->per_page ?? 10);
         return response()->json([
             'status' => 'success',
             'users' => $users,
@@ -36,6 +38,10 @@ class UserController extends Controller
 
     public function store(Request $r)
     {
+
+        // make email lowercase
+        $r['email'] = strtolower($r->email);
+
         $validator = Validator::make($r->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email|max:100',
@@ -48,6 +54,7 @@ class UserController extends Controller
                 'errors' => $validator->errors(),
             ], 422);
         }
+
 
         $user = User::create($validator->validated());
         return response()->json([
@@ -80,6 +87,9 @@ class UserController extends Controller
                 'errors' => $validator->errors(),
             ], 422);
         }
+
+        // make email lowercase
+        $r['email'] = strtolower($r->email);
 
         $user->update($validator->validated());
         return response()->json([
