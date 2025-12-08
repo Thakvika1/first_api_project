@@ -17,6 +17,7 @@ return new class extends Migration
             $table->integer('permission_id');
             $table->integer('permission_feature_id');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

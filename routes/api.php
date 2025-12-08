@@ -6,6 +6,10 @@ use App\Http\Controllers\api\AuthController;
 use App\Http\Controllers\api\ProductController;
 use App\Http\Controllers\api\UserController;
 use App\Http\Controllers\api\CategoryController;
+use App\Http\Controllers\api\RoleController;
+use App\Http\Controllers\Api\PermissionController;
+use App\Http\Controllers\api\PermissionFeatureController;
+use App\Http\Controllers\api\RolePermissionController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -35,4 +39,28 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/category/{id}', [CategoryController::class, 'destroy'])->name('category.destroy');
     Route::get('/category/{id}', [CategoryController::class, 'show'])->name('category.show');
     Route::put('/category/{id}', [CategoryController::class, 'update'])->name('category.update');
+
+    // roles 
+    Route::get('/role', [RoleController::class, 'index']);
+    Route::post('/role', [RoleController::class, 'store']);
+    Route::get('/role/{id}', [RoleController::class, 'show']);
+    Route::put('/role/{id}', [RoleController::class, 'update']);
+    Route::delete('/role/{id}', [RoleController::class, 'destroy']);
+
+    // permissions 
+    Route::get('/permission', [PermissionController::class, 'index']);
+    Route::post('/permission', [PermissionController::class, 'store']);
+    Route::get('/permission/{id}', [PermissionController::class, 'show']);
+    Route::put('/permission/{id}', [PermissionController::class, 'update']);
+    Route::delete('/permission/{id}', [PermissionController::class, 'destroy']);
+
+    // permissions feature
+    Route::get('/permission-feature', [PermissionFeatureController::class, 'index']);
+    Route::post('/permission-feature', [PermissionFeatureController::class, 'store']);
+    Route::get('/permission-feature/{id}', [PermissionFeatureController::class, 'show']);
+    Route::put('/permission-feature/{id}', [PermissionFeatureController::class, 'update']);
+    Route::delete('/permission-feature/{id}', [PermissionFeatureController::class, 'destroy']);
+
+    // Role Permission
+    Route::get('/role-permission/{role_id}', [RolePermissionController::class, 'index']);
 });

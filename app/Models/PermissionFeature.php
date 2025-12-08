@@ -3,8 +3,29 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Permission;
+use App\Models\RolePermission;
 
 class PermissionFeature extends Model
 {
     //
+    use SoftDeletes;
+
+    protected $fillable = [
+        'permission_id',
+        'name',
+        'key',
+        'description'
+    ];
+
+    function permission()
+    {
+        $this->belongsTo(Permission::class, 'permission_id', 'id');
+    }
+
+    function rolePermission()
+    {
+        $this->hasMany(RolePermission::class, 'permission_feature_id', 'id');
+    }
 }
