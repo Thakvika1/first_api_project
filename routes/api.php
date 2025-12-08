@@ -63,4 +63,5 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Role Permission
     Route::get('/role-permission/{role_id}', [RolePermissionController::class, 'index']);
+    Route::post('/set-permission', [RolePermissionController::class, 'setPermission']);
 });

@@ -21,11 +21,11 @@ class PermissionFeature extends Model
 
     function permission()
     {
-        $this->belongsTo(Permission::class, 'permission_id', 'id');
+        return $this->belongsTo(Permission::class, 'permission_id', 'id');
     }
 
     function rolePermission()
     {
-        $this->hasMany(RolePermission::class, 'permission_feature_id', 'id');
+        return $this->hasMany(RolePermission::class, 'permission_feature_id', 'id');
     }
 }
