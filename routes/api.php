@@ -65,8 +65,4 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/role-permission/{role_id}', [RolePermissionController::class, 'index']);
     Route::post('/set-permission', [RolePermissionController::class, 'setPermission']);
 
-    Route::get('/test', function () {
-        // return test();
-        return "hello from route file";
-    });
 });
