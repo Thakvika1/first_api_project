@@ -76,6 +76,17 @@ class RolePermissionController extends Controller
 
         $data = $validate->validated();
 
+
+        // test 
+        // foreach ($data['permission_id'] as $permission_id) {
+        //     $role_permission = RolePermission::where([
+        //         'role_id' => $data['role_id'],
+        //         'permission_id' => $permission_id,
+        //     ]);
+        // }
+
+
+
         foreach ($data['permission_feature_id'] as $value) {
             $role_permission = RolePermission::where([
                 'role_id' => $data['role_id'],
@@ -95,7 +106,7 @@ class RolePermissionController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Permission update successfully'
+            'message' => 'Permission Role update successfully'
         ], 201);
     }
 }
