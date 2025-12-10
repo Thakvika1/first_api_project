@@ -79,10 +79,22 @@ class RolePermissionController extends Controller
 
         // test 
         // foreach ($data['permission_id'] as $permission_id) {
-        //     $role_permission = RolePermission::where([
-        //         'role_id' => $data['role_id'],
-        //         'permission_id' => $permission_id,
-        //     ]);
+        //     foreach ($data['permission_feature_id'] as $key => $permission_feature_id) {
+        //         $role_permission = RolePermission::where([
+        //             'role_id' => $data['role_id'],
+        //             'permission_id' => $permission_id,
+        //             'permission_feature_id' => $permission_feature_id
+        //         ])->first();
+        //         if ($role_permission) {
+        //             $role_permission->forceDelete();
+        //         } else {
+        //             DB::table('role_permissions')->insert([
+        //                 'role_id' => $data['role_id'],
+        //                 'permission_id' => $permission_id,
+        //                 'permission_feature_id' => $permission_feature_id
+        //             ]);
+        //         }
+        //     }
         // }
 
 

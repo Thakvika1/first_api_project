@@ -27,11 +27,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
     // user
-    Route::get('/user', [UserController::class, 'index'])->name('user.index');
-    Route::post('/user', [UserController::class, 'store'])->name('user.store');
-    Route::get('/user/{id}', [UserController::class, 'get'])->name('user.show');
-    Route::put('/user/{id}', [UserController::class, 'update'])->name('user.update');
-    Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
+    Route::get('/user', [UserController::class, 'index'])->name('user.index')->middleware('permission:user,list');
+    Route::post('/user', [UserController::class, 'store'])->name('user.store')->middleware('permission:user,create');
+    Route::get('/user/{id}', [UserController::class, 'get'])->name('user.show')->middleware('permission:user,edit');
+    Route::put('/user/{id}', [UserController::class, 'update'])->name('user.update')->middleware('permission:user,edit');
+    Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('user.destroy')->middleware('permission:user,delete');
 
     // category
     Route::get('/category', [CategoryController::class, 'index'])->name('category.index');
@@ -41,11 +41,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/category/{id}', [CategoryController::class, 'update'])->name('category.update');
 
     // roles 
-    Route::get('/role', [RoleController::class, 'index']);
-    Route::post('/role', [RoleController::class, 'store']);
-    Route::get('/role/{id}', [RoleController::class, 'show']);
-    Route::put('/role/{id}', [RoleController::class, 'update']);
-    Route::delete('/role/{id}', [RoleController::class, 'destroy']);
+    Route::get('/role', [RoleController::class, 'index'])->middleware('permission:role,list');
+    Route::post('/role', [RoleController::class, 'store'])->middleware('permission:role,create');
+    Route::get('/role/{id}', [RoleController::class, 'show'])->middleware('permission:role,edit');
+    Route::put('/role/{id}', [RoleController::class, 'update'])->middleware('permission:role,edit');
+    Route::delete('/role/{id}', [RoleController::class, 'destroy'])->middleware('permission:role,delete');
 
     // permissions 
     Route::get('/permission', [PermissionController::class, 'index']);
@@ -64,5 +64,4 @@ Route::middleware('auth:sanctum')->group(function () {
     // Role Permission
     Route::get('/role-permission/{role_id}', [RolePermissionController::class, 'index']);
     Route::post('/set-permission', [RolePermissionController::class, 'setPermission']);
-
 });
