@@ -77,7 +77,7 @@ class RolePermissionController extends Controller
         $data = $validate->validated();
 
 
-        // test 
+        // test homework
         // foreach ($data['permission_id'] as $permission_id) {
         //     foreach ($data['permission_feature_id'] as $key => $permission_feature_id) {
         //         $role_permission = RolePermission::where([

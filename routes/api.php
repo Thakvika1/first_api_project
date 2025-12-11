@@ -36,11 +36,11 @@ Route::middleware('auth:sanctum')->group(function () {
 
 
     // category
-    Route::get('/category', [CategoryController::class, 'index'])->name('category.index');
-    Route::post('/category', [CategoryController::class, 'store'])->name('category.store');
-    Route::delete('/category/{id}', [CategoryController::class, 'destroy'])->name('category.destroy');
-    Route::get('/category/{id}', [CategoryController::class, 'show'])->name('category.show');
-    Route::put('/category/{id}', [CategoryController::class, 'update'])->name('category.update');
+    Route::get('/category', [CategoryController::class, 'index']);
+    Route::post('/category', [CategoryController::class, 'store']);
+    Route::delete('/category/{id}', [CategoryController::class, 'destroy']);
+    Route::get('/category/{id}', [CategoryController::class, 'show']);
+    Route::put('/category/{id}', [CategoryController::class, 'update']);
 
     // roles 
     Route::get('/role', [RoleController::class, 'index'])->middleware('permission:role,list');
@@ -50,18 +50,20 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/role/{id}', [RoleController::class, 'destroy'])->middleware('permission:role,delete');
 
     // permissions 
-    Route::get('/permission', [PermissionController::class, 'index']);
-    Route::post('/permission', [PermissionController::class, 'store']);
-    Route::get('/permission/{id}', [PermissionController::class, 'show']);
-    Route::put('/permission/{id}', [PermissionController::class, 'update']);
-    Route::delete('/permission/{id}', [PermissionController::class, 'destroy']);
+    // Route::get('/permission', [PermissionController::class, 'index']);
+    // Route::post('/permission', [PermissionController::class, 'store']);
+    // Route::get('/permission/{id}', [PermissionController::class, 'show']);
+    // Route::put('/permission/{id}', [PermissionController::class, 'update']);
+    // Route::delete('/permission/{id}', [PermissionController::class, 'destroy']);
+    Route::apiResource('/permission', PermissionController::class);
 
     // permissions feature
-    Route::get('/permission-feature', [PermissionFeatureController::class, 'index']);
-    Route::post('/permission-feature', [PermissionFeatureController::class, 'store']);
-    Route::get('/permission-feature/{id}', [PermissionFeatureController::class, 'show']);
-    Route::put('/permission-feature/{id}', [PermissionFeatureController::class, 'update']);
-    Route::delete('/permission-feature/{id}', [PermissionFeatureController::class, 'destroy']);
+    // Route::get('/permission-feature', [PermissionFeatureController::class, 'index']);
+    // Route::post('/permission-feature', [PermissionFeatureController::class, 'store']);
+    // Route::get('/permission-feature/{id}', [PermissionFeatureController::class, 'show']);
+    // Route::put('/permission-feature/{id}', [PermissionFeatureController::class, 'update']);
+    // Route::delete('/permission-feature/{id}', [PermissionFeatureController::class, 'destroy']);
+    Route::apiResource('permission-feature', PermissionFeatureController::class);
 
     // Role Permission
     Route::get('/role-permission/{role_id}', [RolePermissionController::class, 'index']);
@@ -73,6 +75,4 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/customer/{id}', [CustomerController::class, 'show']);
     Route::put('/customer/{id}', [CustomerController::class, 'update']);
     Route::delete('/customer/{id}', [CustomerController::class, 'destroy']);
-
-    
 });
