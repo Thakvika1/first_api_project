@@ -13,7 +13,6 @@ class UserController extends BaseCrudController
 
     public function __construct()
     {
-        //
         $this->model = User::class;
         $this->validateCreateData = [
             'name' => 'required|string|max:255',
