@@ -10,6 +10,7 @@ use App\Http\Controllers\api\RoleController;
 use App\Http\Controllers\api\PermissionFeatureController;
 use App\Http\Controllers\api\RolePermissionController;
 use App\Http\Controllers\api\PermissionController;
+use App\Http\Controllers\api\CustomerController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -65,4 +66,13 @@ Route::middleware('auth:sanctum')->group(function () {
     // Role Permission
     Route::get('/role-permission/{role_id}', [RolePermissionController::class, 'index']);
     Route::post('/set-permission', [RolePermissionController::class, 'setPermission']);
+
+    // customer
+    Route::get('/customer', [CustomerController::class, 'index']);
+    Route::post('/customer', [CustomerController::class, 'store']);
+    Route::get('/customer/{id}', [CustomerController::class, 'show']);
+    Route::put('/customer/{id}', [CustomerController::class, 'update']);
+    Route::delete('/customer/{id}', [CustomerController::class, 'destroy']);
+
+    
 });
