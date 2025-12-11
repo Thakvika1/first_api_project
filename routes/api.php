@@ -7,9 +7,9 @@ use App\Http\Controllers\api\ProductController;
 use App\Http\Controllers\api\UserController;
 use App\Http\Controllers\api\CategoryController;
 use App\Http\Controllers\api\RoleController;
-use App\Http\Controllers\Api\PermissionController;
 use App\Http\Controllers\api\PermissionFeatureController;
 use App\Http\Controllers\api\RolePermissionController;
+use App\Http\Controllers\api\PermissionController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -27,11 +27,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
     // user
-    Route::get('/user', [UserController::class, 'index'])->name('user.index')->middleware('permission:user,list');
-    Route::post('/user', [UserController::class, 'store'])->name('user.store')->middleware('permission:user,create');
-    Route::get('/user/{id}', [UserController::class, 'get'])->name('user.show')->middleware('permission:user,edit');
-    Route::put('/user/{id}', [UserController::class, 'update'])->name('user.update')->middleware('permission:user,edit');
-    Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('user.destroy')->middleware('permission:user,delete');
+    Route::get('/user', [UserController::class, 'index'])->middleware('permission:user,list');
+    Route::post('/user', [UserController::class, 'store'])->middleware('permission:user,create');
+    Route::get('/user/{id}', [UserController::class, 'show'])->middleware('permission:user,edit');
+    Route::put('/user/{id}', [UserController::class, 'update'])->middleware('permission:user,edit');
+    Route::delete('/user/{id}', [UserController::class, 'destroy'])->middleware('permission:user,delete');
+
 
     // category
     Route::get('/category', [CategoryController::class, 'index'])->name('category.index');
