@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Validator;
 class BaseCrudController extends Controller
 {
     protected $model;        // The model class
-    protected $validateCreateData;        // for store
+    protected $validateCreateData;  // for store
     protected $validateUpdateData;  // for update
 
     // list all data with pagination
