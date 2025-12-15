@@ -18,11 +18,6 @@ class Permission extends Model
         'description'
     ];
 
-    // function rolePermission()
-    // {
-    //     return $this->hasMany(RolePermission::class, 'permission_id', 'id');
-    // }
-
     function permissionFeatures()
     {
         return $this->hasMany(PermissionFeature::class, 'permission_id', 'id');
