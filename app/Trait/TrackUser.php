@@ -4,9 +4,9 @@ namespace App\Trait;
 
 use Illuminate\Support\Facades\Auth;
 
-trait TrackCreatedUpdatedDeletedBy
+trait TrackUser
 {
-    protected static function bootTrackCreatedUpdatedDeletedBy()
+    protected static function bootTrackUser()
     {
         static::creating(function ($model) {
             $model->created_by = Auth::id();

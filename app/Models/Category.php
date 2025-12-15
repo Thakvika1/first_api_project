@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\User;
-use App\Trait\TrackCreatedUpdatedDeletedBy;
+use App\Trait\TrackUser;
 
 class Category extends Model
 {
-    use SoftDeletes, TrackCreatedUpdatedDeletedBy;
+    use SoftDeletes, TrackUser;
 
     protected $fillable = [
         'name',
