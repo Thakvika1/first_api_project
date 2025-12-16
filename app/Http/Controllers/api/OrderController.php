@@ -122,4 +122,49 @@ class OrderController extends Controller
             ], 500);
         }
     }
+
+    public function voidOrder($id)
+    {
+        $order = Order::find($id);
+        if (!$order) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Order not found.'
+            ], 404);
+        }
+
+        DB::beginTransaction();
+        try {
+            // restore product qty
+            $orderDetail = OrderDetail::where('order_id', $order->id)->get();
+
+            dd($orderDetail);
+            foreach ($orderDetail as $key => $order_detail) {
+                $product = Product::find($order_detail->product_id);
+                if ($product) {
+                    $product->qty += $order_detail->qty;
+                    $product->save();
+                }
+            }
+
+            // delete order details
+            OrderDetail::where('order_id', $order->id)->delete();
+
+            // delete order
+            $order->delete();
+
+            DB::commit();
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Order voided successfully.'
+            ], 200);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed to void order: ' . $e->getMessage()
+            ], 500);
+        }
+    }
 }
