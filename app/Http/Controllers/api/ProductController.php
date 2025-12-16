@@ -7,10 +7,6 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Http\Controllers\BaseCrudController;
 
-// class ProductController extends Controller
-// {
-//     //
-// }
 
 class ProductController extends BaseCrudController
 {
@@ -35,3 +31,8 @@ class ProductController extends BaseCrudController
         ];
     }
 }
+
+// class ProductController extends Controller
+// {
+//     //
+// }
